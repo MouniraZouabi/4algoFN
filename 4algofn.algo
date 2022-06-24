@@ -1,0 +1,128 @@
+*************** Array ********************
+ALGORITHM Array_simular
+VAR
+tab1 : ARRAY_OF INTEGER[4];
+tab2 : ARRAY_OF INTEGER[5];
+i , j , sum: INTEGER :=0;
+find :BOOLEAN := "TRUE" ;
+
+BEGIN
+tab1 := {3,1,7,9}; 
+tab2 := {2,4,1,9,3}; 
+
+FOR i FROM 0 TO 3 COUNT 1 DO
+  FOR j FROM 0 TO 4 COUNT 1 DO
+   If (tab1[i]=tab2[j]) THEN
+    find:=FALSE ;
+   END_IF
+   END_FOR
+If(find == TRUE)THEN
+sum:=sum+tab1[i];
+END_IF
+find:=TRUE ;
+END_FOR
+write (sum);
+END
+-----------------------------------------------------------------------------------------------------
+ALGORITHM Array_distinct
+VAR
+tab1 : ARRAY_OF INTEGER[4];
+tab2 : ARRAY_OF INTEGER[5];
+i , j , sum: INTEGER :=0;
+find :BOOLEAN := "FALSE" ;
+
+BEGIN
+tab1 := {3,1,7,9}; 
+tab2 := {2,4,1,9,3}; 
+
+FOR i FROM 0 TO 3 STEP 1 DO
+  FOR j FROM 0 TO 4 STEP 1 DO
+   If (tab1[i]=tab2[j]) THEN
+    find:=TRUE ;
+   END_IF
+   END_FOR
+If(find == FALSE)THEN
+sum:=sum+tab1[i];
+END_IF
+find:=FALSE ;
+END_FOR
+write (sum);
+END
+-----------------------------------------------------------------------------------------------------
+_______________________________________________________________________________________________
+
+*******************************HASH_TABLE*******************************
+
+ALGORITHM HashTab_distinct
+VAR
+tab1 : ARRAY_OF INTEGER[4];
+tab2 : ARRAY_OF INTEGER[5];
+htab: HASH_TABLE<Integer,INTEGER>
+i , j , sum , COUNT: INTEGER :=0;
+BEGIN
+tab1 := {3,1,7,9}; 
+tab2 := {2,4,1,9,3};
+    FOR i FROM 0 TO 3 STEP 1 DO
+       
+       if (htab.lookup(tab1[i])) THEN
+    htab.get(tab1[i]):=COUNT;
+    COUNT:=COUNT+1 ;
+    htab.insert(tab1[i],COUNT);
+END_IF
+END_FOR
+
+   FOR j FROM 0 TO 4 STEP 1  DO
+       if (htab.lookup(tab2[j]),htab.get(tab2[j]+1)) THEN
+       htab.insert(tab2[j],1);
+END_IF
+END_FOR
+
+   FOR i FROM 0 TO 3 STEP 1  DO
+   IF (htab.get(tab1[i]):=1) THEN
+       sum:=sum+tab1[i]
+
+   END_IF
+    END_FOR
+   FOR j FROM 0 TO 4 STEP 1 DO
+       IF (htab.get(tab2[j]):=1 ) THEN
+           sum:=sum + tab2[j]
+       END_IF
+   END_FOR
+  Write(sum) 
+END
+_________
+
+ALGORITHM HashTab_simular
+VAR
+tab1 : ARRAY_OF INTEGER[4];
+tab2 : ARRAY_OF INTEGER[5];
+htab: HASH_TABLE<Integer,INTEGER>
+i , j , sum , COUNT: INTEGER :=0;
+BEGIN
+tab1 := {3,1,7,9}; 
+tab2 := {2,4,1,9,3};
+    FOR i FROM 0 TO 3 STEP 1 DO
+       
+       if (htab.lookup(tab1[i])) THEN
+    htab.get(tab1[i]):=COUNT;
+    COUNT:=COUNT+1 ;
+    htab.insert(tab1[i],COUNT);
+END_IF
+END_FOR
+   FOR j FROM 0 TO 4 STEP 1  DO
+       if (htab.lookup(tab2[j]),htab.get(tab2[j]+1)) THEN
+       htab.insert(tab2[j],1);
+END_IF
+END_FOR
+   FOR i FROM 0 TO 3 STEP 1  DO
+   IF (htab.get(tab1[i]):=1) THEN
+       sum:=sum+tab1[i]
+   END_IF
+    END_FOR
+   FOR j FROM 0 TO 4 STEP 1 DO
+       IF (htab.get(tab2[j])>1 ) THEN
+           sum:=sum + tab2[j]
+       END_IF
+   END_FOR
+  Write(sum) 
+END
